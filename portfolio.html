@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Franklin Ogonna Ede | Researcher & Developer</title>
+<meta name="description" content="Portfolio of Franklin Ogonna Ede, a researcher and developer: Computer Science M.Sc. student, ICT professional and AI training specialist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0f14;
+    --bg-soft:#10161d;
+    --card:#141b24;
+    --border:#1f2a37;
+    --text:#e6edf3;
+    --muted:#93a1b1;
+    --accent:#34d399;
+    --accent-2:#38bdf8;
+    --radius:16px;
+    --max:1100px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;line-height:1.2;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .container{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+  section{padding:96px 0}
+  .eyebrow{color:var(--accent);font-weight:600;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+  .section-title{font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:16px}
+  .section-intro{color:var(--muted);max-width:640px;margin-bottom:48px}
+
+  /* Nav */
+  header{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    background:rgba(11,15,20,.75);backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;transition:border-color .3s;
+  }
+  header.scrolled{border-color:var(--border)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-family:'Space Grotesk';font-weight:700;font-size:1.2rem}
+  .logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{color:var(--muted);font-size:.95rem;font-weight:500;position:relative;transition:color .25s}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--accent);transition:width .25s}
+  .nav-links a:hover,.nav-links a.active{color:var(--text)}
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+  .menu-btn{display:none;background:none;border:0;color:var(--text);cursor:pointer;padding:8px}
+  .menu-btn svg{width:26px;height:26px;display:block}
+
+  /* Hero */
+  .hero{min-height:100vh;display:flex;align-items:center;padding-top:110px;position:relative;overflow:hidden}
+  .hero::before,.hero::after{
+    content:"";position:absolute;border-radius:50%;filter:blur(120px);opacity:.18;z-index:0;pointer-events:none
+  }
+  .hero::before{width:480px;height:480px;background:var(--accent);top:-120px;right:-100px}
+  .hero::after{width:420px;height:420px;background:var(--accent-2);bottom:-160px;left:-120px}
+  .hero .container{position:relative;z-index:1}
+  .badge{
+    display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--border);
+    background:var(--card);border-radius:999px;font-size:.85rem;color:var(--muted);margin-bottom:28px
+  }
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pulse 2s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+  .hero h1{font-size:clamp(2.6rem,7vw,4.8rem);font-weight:700;margin-bottom:16px}
+  .grad{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero h2{font-size:clamp(1.15rem,2.6vw,1.6rem);font-weight:500;color:var(--muted);margin-bottom:24px}
+  .hero h2 #typed{color:var(--text)}
+  .cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-.15em;margin-left:3px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .hero p.lead{max-width:620px;color:var(--muted);font-size:1.08rem;margin-bottom:36px}
+  .btns{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:12px;font-weight:600;font-size:.95rem;
+    transition:transform .25s,box-shadow .25s,background .25s,border-color .25s;border:1px solid transparent;cursor:pointer
+  }
+  .btn-primary{background:var(--accent);color:#04130c}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px -8px rgba(52,211,153,.55)}
+  .btn-ghost{border-color:var(--border);background:var(--card)}
+  .btn-ghost:hover{transform:translateY(-3px);border-color:var(--accent);color:var(--accent)}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:72px}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:transform .3s,border-color .3s}
+  .stat:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .stat b{display:block;font-family:'Space Grotesk';font-size:2rem;color:var(--accent)}
+  .stat span{color:var(--muted);font-size:.88rem}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:start}
+  .about-text p{color:var(--muted);margin-bottom:18px}
+  .about-text p strong{color:var(--text);font-weight:600}
+  .info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+  .info-card h3{font-size:1.05rem;margin-bottom:18px}
+  .info-card ul{list-style:none;display:grid;gap:14px}
+  .info-card li{display:flex;flex-direction:column;font-size:.95rem}
+  .info-card li small{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+
+  /* Skills */
+  .skills{background:var(--bg-soft);border-block:1px solid var(--border)}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;
+    transition:transform .3s,border-color .3s,box-shadow .3s
+  }
+  .card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 18px 40px -22px rgba(52,211,153,.5)}
+  .icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(52,211,153,.1);color:var(--accent);margin-bottom:18px}
+  .icon svg{width:24px;height:24px}
+  .card h3{font-size:1.15rem;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:.95rem;margin-bottom:16px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:.78rem;padding:5px 11px;border-radius:999px;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:#9bd8f5}
+
+  /* Timeline */
+  .timeline{position:relative;padding-left:30px;display:grid;gap:22px}
+  .timeline::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--border)}
+  .item{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px;transition:border-color .3s,transform .3s}
+  .item:hover{border-color:var(--accent);transform:translateX(4px)}
+  .item::before{content:"";position:absolute;left:-30px;top:30px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+  .item-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-bottom:8px}
+  .item h3{font-size:1.1rem}
+  .date{color:var(--accent);font-size:.85rem;font-weight:600}
+  .org{color:var(--muted);font-size:.92rem;margin-bottom:12px}
+  .item ul{padding-left:18px;color:var(--muted);font-size:.93rem;display:grid;gap:6px}
+  .item li::marker{color:var(--accent)}
+
+  /* Publications */
+  .pubs{background:var(--bg-soft);border-block:1px solid var(--border)}
+  .pub-list{display:grid;gap:14px}
+  .pub{
+    display:flex;gap:18px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;
+    transition:border-color .3s,transform .3s
+  }
+  .pub:hover{border-color:var(--accent-2);transform:translateY(-3px)}
+  .pub .yr{font-family:'Space Grotesk';font-weight:700;color:var(--accent-2);min-width:48px}
+  .pub h3{font-size:1rem;font-weight:600;margin-bottom:4px;font-family:'Inter'}
+  .pub p{color:var(--muted);font-size:.85rem}
+  .pub a{color:var(--accent-2);font-size:.85rem;display:inline-block;margin-top:6px}
+  .pub a:hover{text-decoration:underline}
+
+  /* Education */
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .cert-list{list-style:none;display:grid;gap:10px;margin-top:4px}
+  .cert-list li{display:flex;gap:10px;color:var(--muted);font-size:.95rem}
+  .cert-list li::before{content:"✓";color:var(--accent);font-weight:700}
+
+  /* Contact */
+  .contact-box{
+    text-align:center;background:linear-gradient(160deg,var(--card),#0f1a1a);border:1px solid var(--border);
+    border-radius:24px;padding:64px 28px
+  }
+  .contact-box p{color:var(--muted);max-width:520px;margin:0 auto 34px}
+  .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+  .socials{margin-top:28px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+  .socials a{transition:color .25s}
+  .socials a:hover{color:var(--accent)}
+
+  footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:.88rem}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .dot,.cursor{animation:none}
+  }
+
+  /* Responsive */
+  @media (max-width:900px){
+    .about-grid,.edu-grid{grid-template-columns:1fr}
+    .grid-3{grid-template-columns:1fr 1fr}
+    .stats{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:700px){
+    section{padding:72px 0}
+    .menu-btn{display:block}
+    .nav-links{
+      position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);
+      border-bottom:1px solid var(--border);max-height:0;overflow:hidden;transition:max-height .35s ease
+    }
+    .nav-links.open{max-height:360px}
+    .nav-links li a{display:block;padding:16px 24px}
+    .nav-links a::after{display:none}
+    .grid-3{grid-template-columns:1fr}
+    .pub{flex-direction:column;gap:6px}
+    .contact-box{padding:48px 20px}
+    .btn{width:100%;justify-content:center}
+    .btns{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="container nav">
+    <a href="#home" class="logo">Franklin<span>.</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Research</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="badge"><span class="dot"></span> Open to remote &amp; global opportunities</div>
+      <h1>Hi, I'm <span class="grad">Franklin Ogonna Ede</span></h1>
+      <h2>A researcher and developer<span class="cursor"></span> <br><span id="typed"></span></h2>
+      <p class="lead">
+        I'm a Computer Science M.Sc. student and ICT professional who blends research, Python development and AI model evaluation.
+        I turn complex problems into reliable systems, clear documentation and published findings.
+      </p>
+      <div class="btns">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+        <a href="#experience" class="btn btn-ghost">View experience</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat reveal"><b data-count="9">0</b><span>Peer-reviewed publications</span></div>
+        <div class="stat reveal"><b data-count="5">0</b><span>Manuscripts under review</span></div>
+        <div class="stat reveal"><b data-count="4" data-suffix="+">0</b><span>Years in ICT &amp; research</span></div>
+        <div class="stat reveal"><b data-count="6">0</b><span>Professional certifications</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container about-grid">
+      <div class="about-text reveal">
+        <div class="eyebrow">About me</div>
+        <h2 class="section-title">Research-minded, technically grounded</h2>
+        <p>I'm a <strong>Computer Science graduate and ICT professional</strong> currently pursuing an M.Sc. in Computer Science at <strong>Rivers State University</strong>, Port Harcourt. I've delivered remote technical support, AI model training and evaluation, and research assistance for both international and local organizations.</p>
+        <p>As an <strong>AI trainer</strong>, I evaluate model-generated responses against detailed rubrics, provide structured written feedback and make sure quality, consistency and guideline adherence hold up in fast-paced remote projects.</p>
+        <p>As a <strong>research assistant</strong>, I handle literature reviews, data collection, analysis and documentation for cross-location teams. I'm the author of <strong>nine peer-reviewed publications</strong> in computer science and ICT-related fields, with five more manuscripts under review.</p>
+        <p>On the technical side, I bring strong skills in hardware and software troubleshooting, system diagnostics, <strong>Microsoft 365 administration</strong> and document control across government and private-sector organizations. I'm proficient in <strong>Python</strong> for scripting, data handling and automation.</p>
+      </div>
+      <aside class="info-card reveal">
+        <h3>Quick facts</h3>
+        <ul>
+          <li><small>Location</small>Port Harcourt, Nigeria</li>
+          <li><small>Currently</small>M.Sc. Computer Science, Rivers State University</li>
+          <li><small>Degree</small>B.Sc. Computer Science, University of Calabar (2024)</li>
+          <li><small>Availability</small>Open to remote work, globally</li>
+          <li><small>Interests</small>Technology · Research · Football · Reading</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="eyebrow reveal">What I do</div>
+      <h2 class="section-title reveal">Skills &amp; competencies</h2>
+      <p class="section-intro reveal">A mix of AI evaluation, research, development and IT operations experience.</p>
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.2L20 9l-4 3.9.9 5.6L12 16l-4.9 2.5.9-5.6L4 9l5.6-.8z"/></svg></div>
+          <h3>AI Training &amp; Evaluation</h3>
+          <p>Rubric-based rating of AI outputs for accuracy, relevance, helpfulness and safety, with clear written feedback.</p>
+          <div class="tags"><span class="tag">Rubric Evaluation</span><span class="tag">Annotation</span><span class="tag">Quality Rating</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div>
+          <h3>Research &amp; Data Analysis</h3>
+          <p>Literature reviews, data collection, cleaning and analysis, plus reports for project leads and stakeholders.</p>
+          <div class="tags"><span class="tag">Literature Review</span><span class="tag">Data Analysis</span><span class="tag">Reporting</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></svg></div>
+          <h3>Development</h3>
+          <p>Python for scripting, data handling and automation, applied to research and day-to-day IT workflows.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Automation</span><span class="tag">Scripting</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+          <h3>ICT &amp; Systems Support</h3>
+          <p>Hardware and software troubleshooting, system diagnostics, maintenance and network support.</p>
+          <div class="tags"><span class="tag">Troubleshooting</span><span class="tag">Networking</span><span class="tag">Maintenance</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div>
+          <h3>Documentation &amp; Compliance</h3>
+          <p>Document control, version tracking and compliance with quality and regulatory procedures.</p>
+          <div class="tags"><span class="tag">Document Control</span><span class="tag">QMS</span><span class="tag">Audit Awareness</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg></div>
+          <h3>Remote Collaboration</h3>
+          <p>Async communication, self-management and reliable delivery with teams across different locations.</p>
+          <div class="tags"><span class="tag">Microsoft 365</span><span class="tag">Async Work</span><span class="tag">Time Management</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="eyebrow reveal">Career</div>
+      <h2 class="section-title reveal">Professional experience</h2>
+      <p class="section-intro reveal">From government ICT to remote AI training and research.</p>
+      <div class="timeline">
+        <div class="item reveal">
+          <div class="item-head"><h3>AI Trainer / Rater (Rubrics-Based Evaluation)</h3><span class="date">Feb 2026 – May 2026</span></div>
+          <div class="org">Appen · Remote</div>
+          <ul>
+            <li>Evaluated AI-generated responses against detailed rubrics for accuracy, relevance, helpfulness and safety.</li>
+            <li>Annotated content to flag errors, inconsistencies and policy violations, with clear feedback for model fine-tuning.</li>
+            <li>Kept accuracy and consistency high across multiple concurrent tasks under strict turnaround times.</li>
+          </ul>
+        </div>
+        <div class="item reveal">
+          <div class="item-head"><h3>Research Assistant</h3><span class="date">Mar 2025 – Feb 2026</span></div>
+          <div class="org">ResearchHub Nexus · Lagos, Nigeria (Remote)</div>
+          <ul>
+            <li>Conducted literature reviews, data gathering and background research for ongoing projects.</li>
+            <li>Organized, cleaned and analyzed data with Microsoft Office and Python.</li>
+            <li>Prepared summaries and reports, and collaborated with researchers across locations.</li>
+          </ul>
+        </div>
+        <div class="item reveal">
+          <div class="item-head"><h3>ICT Corps Member (NYSC)</h3><span class="date">Jan 2025 – Dec 2025</span></div>
+          <div class="org">Hydrocarbon Pollution Remediation Project (HYPREP) · Port Harcourt</div>
+          <ul>
+            <li>Provided technical support and troubleshooting for ICT systems and equipment.</li>
+            <li>Monitored systems, ran preventive maintenance and trained users on software applications.</li>
+          </ul>
+        </div>
+        <div class="item reveal">
+          <div class="item-head"><h3>Document Controller Officer</h3><span class="date">Jul 2023 – Dec 2024</span></div>
+          <div class="org">Lustre Metal Resources · Trans Amadi, Port Harcourt</div>
+          <ul>
+            <li>Managed creation, review, storage and distribution of technical and administrative documents.</li>
+            <li>Maintained version control and record retrieval, and supported audits and inspections.</li>
+          </ul>
+        </div>
+        <div class="item reveal">
+          <div class="item-head"><h3>ICT Officer</h3><span class="date">Jun 2022 – Feb 2023</span></div>
+          <div class="org">Ministry of Information · Calabar</div>
+          <ul>
+            <li>Managed day-to-day ICT operations and technical support services.</li>
+            <li>Maintained network infrastructure and system security, and assisted staff across ICT platforms.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section class="pubs" id="publications">
+    <div class="container">
+      <div class="eyebrow reveal">Research</div>
+      <h2 class="section-title reveal">Selected publications</h2>
+      <p class="section-intro reveal">Nine peer-reviewed articles across computational chemistry, energy, health and ICT, with five manuscripts currently under review. ORCID: <a href="https://orcid.org/0009-0007-4420-0783" target="_blank" rel="noopener" style="color:var(--accent-2)">0009-0007-4420-0783</a></p>
+      <div class="pub-list">
+        <div class="pub reveal">
+          <div class="yr">2026</div>
+          <div><h3>Comparative Genomic Analysis of Cancer-Associated Mutations across Different Tumour Types</h3><p>Journal of Cancer Research and Reviews, 3(1): 20–37</p><a href="https://doi.org/10.5455/JCRR.2026.v3.i1.2" target="_blank" rel="noopener">View DOI →</a></div>
+        </div>
+        <div class="pub reveal">
+          <div class="yr">2026</div>
+          <div><h3>Solar- and Wind-Powered Electrolysis Pathways for Green Hydrogen Production: A Comparative Assessment</h3><p>Green hydrogen &amp; renewable energy</p><a href="https://doi.org/10.31031/SBB.2026.07.000678" target="_blank" rel="noopener">View DOI →</a></div>
+        </div>
+        <div class="pub reveal">
+          <div class="yr">2025</div>
+          <div><h3>Smart Electrochemical Sensors and IoT for Monitoring Heavy Metals in Nigerian Water</h3><p>Review of advances and deployment challenges</p><a href="https://doi.org/10.62622/teiee.026.4.1.79-89" target="_blank" rel="noopener">View DOI →</a></div>
+        </div>
+        <div class="pub reveal">
+          <div class="yr">2025</div>
+          <div><h3>Life Cycle Assessment of Bioenergy Systems versus Fossil Fuel Alternatives</h3><p>Trends in Ecological and Indoor Environmental Engineering, 3(2): 46–59</p><a href="https://doi.org/10.62622/TEIEE.025.3.2.46-59" target="_blank" rel="noopener">View DOI →</a></div>
+        </div>
+        <div class="pub reveal">
+          <div class="yr">2023</div>
+          <div><h3>Metals (B, Ni) encapsulation of graphene/PEDOT hybrid materials for gas sensing applications</h3><p>Talanta Open · A computational study</p><a href="https://doi.org/10.1016/j.talo.2023.100252" target="_blank" rel="noopener">View DOI →</a></div>
+        </div>
+        <div class="pub reveal">
+          <div class="yr">Review</div>
+          <div><h3>Machine Learning-Based Cyber Security Threat Detection Systems</h3><p>European Journal of Computer Sciences and Informatics · Under review</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="eyebrow reveal">Background</div>
+      <h2 class="section-title reveal">Education &amp; certifications</h2>
+      <div class="edu-grid" style="margin-top:40px">
+        <div class="card reveal">
+          <h3>Education</h3>
+          <div class="item-head" style="margin-top:14px"><strong>M.Sc. Computer Science</strong><span class="date">In progress</span></div>
+          <p style="margin-bottom:18px">Rivers State University, Nkpolu, Port Harcourt</p>
+          <div class="item-head"><strong>B.Sc. Computer Science</strong><span class="date">2024</span></div>
+          <p>University of Calabar, Nigeria</p>
+        </div>
+        <div class="card reveal">
+          <h3>Certifications</h3>
+          <ul class="cert-list" style="margin-top:14px">
+            <li>HSE Induction Certification</li>
+            <li>Quality Management System (QMS)</li>
+            <li>COSHH Certification &amp; Risk Assessor</li>
+            <li>Microsoft 365 Certification</li>
+            <li>Internal Audit Awareness</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="padding-top:40px">
+    <div class="container">
+      <div class="contact-box reveal">
+        <div class="eyebrow">Contact</div>
+        <h2 class="section-title">Let's work together</h2>
+        <p>Whether it's an AI evaluation project, research support or a technical role, I'd love to hear from you. I'm open to remote work worldwide.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:frankede454@gmail.com">✉ frankede454@gmail.com</a>
+          <a class="btn btn-ghost" href="https://github.com/frankzion-creator" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="socials">
+          <a href="https://linkedin.com/in/ede-franklin-ogonna" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://orcid.org/0009-0007-4420-0783" target="_blank" rel="noopener">ORCID</a>
+          <a href="mailto:ede.franklin@rsu.edu.ng">ede.franklin@rsu.edu.ng</a>
+          <a href="tel:+2347065014278">+234 706 501 4278</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">© <span id="year"></span> Franklin Ogonna Ede. All rights reserved.</div>
+</footer>
+
+<script>
+  // Header shadow + active link
+  const header = document.getElementById('header');
+  const links = [...document.querySelectorAll('.nav-links a')];
+  const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+  function onScroll(){
+    header.classList.toggle('scrolled', window.scrollY > 10);
+    const y = window.scrollY + 120;
+    let current = 0;
+    sections.forEach((s,i) => { if (s && s.offsetTop <= y) current = i; });
+    links.forEach((a,i) => a.classList.toggle('active', i === current));
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // Mobile menu
+  const btn = document.getElementById('menuBtn');
+  const nav = document.getElementById('navLinks');
+  btn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+  links.forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); btn.setAttribute('aria-expanded', false); }));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Count-up stats
+  const counters = document.querySelectorAll('[data-count]');
+  const co = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '';
+      let n = 0; const step = Math.max(1, Math.ceil(target/30));
+      const t = setInterval(() => { n = Math.min(target, n+step); el.textContent = n + suffix; if (n === target) clearInterval(t); }, 40);
+      co.unobserve(el);
+    });
+  }, {threshold:.5});
+  counters.forEach(c => co.observe(c));
+
+  // Typing effect
+  const phrases = ['Computer Science M.Sc. student','AI model trainer & evaluator','Python developer','ICT & research professional'];
+  const typed = document.getElementById('typed');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce){ typed.textContent = phrases[0]; }
+  else {
+    let p = 0, c = 0, del = false;
+    (function tick(){
+      const word = phrases[p];
+      typed.textContent = word.slice(0, c);
+      if (!del && c === word.length){ del = true; return setTimeout(tick, 1600); }
+      if (del && c === 0){ del = false; p = (p+1) % phrases.length; }
+      c += del ? -1 : 1;
+      setTimeout(tick, del ? 35 : 70);
+    })();
+  }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
+
